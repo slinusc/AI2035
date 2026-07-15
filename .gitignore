@@ -1,0 +1,12 @@
+.env
+.venv/
+venv/
+__pycache__/
+*.pyc
+.chainlit/.langchain.db
+.chainlit/translations/
+.DS_Store
+.files/
+
+# Local planning material (not for the public repo)
+context/

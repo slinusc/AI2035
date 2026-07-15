@@ -1,0 +1,23 @@
+/* --- Remove Chainlit branding -------------------------------------------- */
+
+/* "Built with Chainlit" watermark (login page + chat footer) */
+.watermark {
+  display: none !important;
+}
+
+/* Chainlit logo image (login header + chat header) */
+img[alt="logo"] {
+  display: none !important;
+}
+
+/* --- Login page: drop the right image panel, center the form ------------- */
+
+/* The login layout is a 2-column grid (form | image). Collapse to 1 column. */
+.grid.min-h-svh.lg\:grid-cols-2 {
+  grid-template-columns: 1fr !important;
+}
+
+/* Hide the right-hand image panel entirely. */
+.bg-muted.lg\:block.overflow-hidden {
+  display: none !important;
+}

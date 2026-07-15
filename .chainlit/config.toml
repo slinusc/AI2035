@@ -1,0 +1,28 @@
+[project]
+enable_telemetry = false
+user_env = []
+session_timeout = 3600
+cache = false
+
+[features]
+unsafe_allow_html = false
+latex = false
+
+[features.spontaneous_file_upload]
+enabled = false
+
+[UI]
+name = "AI Futures 2035"
+description = "Interactive modelling of positive AI future scenarios to 2035"
+# Force English for all users regardless of browser locale.
+language = "en-US"
+default_theme = "dark"
+default_collapse_content = true
+cot = "hidden"
+# Chats are persisted in the sidebar, so starting a new chat loses nothing.
+confirm_new_chat = false
+# Hide Chainlit branding and collapse the login layout to a centered form.
+custom_css = "/public/custom.css"
+
+[meta]
+generated_by = "app"
