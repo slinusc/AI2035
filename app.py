@@ -10,6 +10,8 @@ Flow:
 
 from __future__ import annotations
 
+from datetime import date
+
 import chainlit as cl
 from chainlit.data.sql_alchemy import SQLAlchemyDataLayer
 
@@ -17,6 +19,17 @@ import config
 from llm import stream_chat
 
 config.validate()
+
+
+def _system_prompt() -> str:
+    """System prompt with today's date appended, so the model anchors the story
+    in the present (not its training-time assumptions) and moves forward to 2035."""
+    return (
+        f"{config.SYSTEM_PROMPT}\n\n"
+        f"The current date is {date.today().isoformat()}. Treat this as \"now\": "
+        f"open the scenario in the present and move forward toward 2035. "
+        f"Never set the opening in a year earlier than the current date."
+    )
 
 HISTORY_KEY = "history"
 
@@ -159,7 +172,7 @@ async def _stream_answer(history: list[dict]):
 
     collected: list[str] = []
     try:
-        async for token in stream_chat(config.SYSTEM_PROMPT, history):
+        async for token in stream_chat(_system_prompt(), history):
             collected.append(token)
             await answer.stream_token(token)
     except Exception as exc:  # surface provider/config errors to the tester
