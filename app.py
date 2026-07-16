@@ -64,14 +64,24 @@ def auth_callback(username: str, password: str):
 # --- Intake -----------------------------------------------------------------
 
 INTAKE_BACKGROUND = (
-    "**Step 1 of 2 — Background**\n\n"
-    "Briefly describe the background of your assumptions: from which "
-    "perspective and in what context are you modelling the future scenario?"
+    "**Question 1 of 2**\n\n"
+    "Before you give me your set of alternative, non-mainstream assumptions "
+    "about the state and trajectory of AI and society, please provide me with "
+    "some context in which you place these assumptions. This can be a specific "
+    "aspect of the current situation to focus on, and/or your assessment of it.\n\n"
+    "_Example: 'Consider that AI development is mainly driven by a few highly "
+    "valuated start-ups in few regions of the world, driven by massive amounts "
+    "of venture capital and the promise of developing AGI that is in immediate "
+    "reach. They invest heavily in compute infrastructure that will be outdated "
+    "in about 5 years after purchase.'_"
 )
 
 INTAKE_ASSUMPTIONS = (
-    "**Step 2 of 2 — Assumptions**\n\n"
-    "List your assumptions (about 3–10), **one per line**."
+    "**Question 2 of 2**\n\n"
+    "Now state your assumptions that deviate from the mainstream assumptions "
+    "undergirding popular, often negative scenarios.\n\n"
+    "_Example: 'There will be no fundamental leaps towards AGI in the next "
+    "10 years.'_"
 )
 
 
@@ -91,8 +101,8 @@ async def _send(content: str) -> None:
 def _assemble_first_message(background: str, assumptions: str) -> str:
     """Combine components #2 and #3 into the opening user turn."""
     return (
-        f"## Background of the assumptions\n\n{background}\n\n"
-        f"## Assumptions\n\n{assumptions}"
+        f"## Context\n\n{background}\n\n"
+        f"## Assumptions (deviating from the mainstream)\n\n{assumptions}"
     )
 
 
@@ -107,11 +117,12 @@ def _assemble_first_message(background: str, assumptions: str) -> str:
 @cl.on_chat_start
 async def on_chat_start():
     await _send(
-        "Welcome! This interface helps you model a **positive AI future "
-        "scenario for 2035**.\n\n"
-        "I will first ask you two short questions. After that, you can "
-        "continue the conversation freely and refine the scenario "
-        "iteratively."
+        "Welcome! This interface helps you explore a **positive future "
+        "scenario for our society with AI in ten years**.\n\n"
+        "I will first ask you two short questions to initiate the exploration. "
+        "After that, you can continue the conversation freely and refine the "
+        "scenario iteratively (e.g., by challenging my extrapolations, adding "
+        "new or changing old assumptions, pruning 'branches', etc.)."
     )
     await _send(INTAKE_BACKGROUND)
     cl.user_session.set(STAGE_KEY, "background")

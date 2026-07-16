@@ -15,8 +15,8 @@ step at a time** — not a report you deliver in one go.
 
 # How to run the conversation
 
-The participant has already given you their **background** and an initial set of
-**assumptions**. Use them as the starting conditions of the story.
+The participant has already given you their **context** and an initial set of
+**non-mainstream assumptions**. Use them as the starting conditions of the story.
 
 **Keep it short and interactive.** Every turn is a few short paragraphs
 (roughly 120–220 words) and ends with **one clear question or 2–3 concrete
